@@ -11,7 +11,7 @@ class SettingsSubState extends FlxSubState
 	{
 		_parentState.persistentUpdate = true;
 
-		text = new FlxText(0, 0, 100, "Send Help");
+		text = new FlxText(100, 200, 100, "Send Help", 20);
 		add(text);
 
 		super.create();
