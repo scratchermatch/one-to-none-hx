@@ -19,8 +19,9 @@ class PlayState extends FlxState
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
 		add(settingsButton);
 		terrain = new FlxTilemap();
-		terrain.loadMapFrom2DArray(generateTerrainChunk(5, 5, 1, 1),
-								"assets/images/tilesets/testtileset.png", 16, 16, FlxTilemapAutoTiling.OFF);
+		terrain.loadMapFrom2DArray(generateTerrainChunk(10, 10, 1, 1),
+		"assets/images/tilesets/testtileset.png", 16, 16,
+		FlxTilemapAutoTiling.OFF);
 		add(terrain);
 		terrain.screenCenter();
 		super.create();
@@ -46,7 +47,7 @@ class PlayState extends FlxState
 
 	function generateTerrainTile(x:Int, y:Int):Int{
 		//Magical generation function that returns which tile is located at x, y
-		return 1;
+		return Math.floor(Math.random() * 51);
 	}
 
 	function settingsButtonClicked():Void{
