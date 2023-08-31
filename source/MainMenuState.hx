@@ -3,7 +3,6 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.ui.FlxButton;
-import js.html.AbortController;
 
 class MainMenuState extends FlxState {
 	private var startButton:FlxButton;
@@ -20,11 +19,11 @@ class MainMenuState extends FlxState {
 		super.update(elapsed);
 	}
 
-	function startButtonClicked(){
+	private function startButtonClicked(){
 		FlxG.switchState(new PlayState());
 	}
 
-	function settingsButtonClicked(){
+	private function settingsButtonClicked(){
 		FlxG.switchState(new MainSettingsState());
 	}
 }

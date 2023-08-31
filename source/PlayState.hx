@@ -7,14 +7,14 @@ import flixel.ui.FlxButton;
 
 class PlayState extends FlxState
 {
-	var settings:FlxButton;
+	var settingsButton:FlxButton;
 	var settingsOpen:Bool = false;
 	var settingsSub:SettingsSubState;
 
 	override public function create()
 	{
-		settings = new FlxButton(0, 0, "Settings", clickSettings);
-		add(settings);
+		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
+		add(settingsButton);
 		super.create();
 	}
 
@@ -23,7 +23,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 	}
 
-	function clickSettings()
+	function settingsButtonClicked()
 	{
 		if (settingsOpen) {
 			settingsSub.close();
