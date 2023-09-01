@@ -17,17 +17,23 @@ class PlayState extends FlxState
 
 	var terrain:FlxTilemap;
 
+	var coreunit:CoreUnit;
+
 	override public function create()
 	{
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
-		add(settingsButton);
+		
 		terrain = new FlxTilemap();
 		terrain.loadMapFrom2DArray(generateTerrainChunk(
 			Std.int(FlxG.height / TILE_HEIGHT),
 			Std.int(FlxG.width / TILE_WIDTH), 1, 1),
 			"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
 			FlxTilemapAutoTiling.OFF);
+		
+		coreunit = new CoreUnit(250, 250);
 		add(terrain);
+		add(coreunit);
+		add(settingsButton);
 		terrain.screenCenter();
 		super.create();
 	}
