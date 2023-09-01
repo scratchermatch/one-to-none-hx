@@ -31,12 +31,12 @@ class PlayState extends FlxState
 			FlxTilemapAutoTiling.OFF);
 		
 		coreunit = new CoreUnit(250, 250);
-		coreunit.loadGraphic("assets/images/sprites/player.png");
 		
 		add(terrain);
 		add(coreunit);
 		add(settingsButton);
 		terrain.screenCenter();
+
 		super.create();
 	}
 
