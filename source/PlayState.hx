@@ -8,6 +8,9 @@ import flixel.ui.FlxButton;
 
 class PlayState extends FlxState
 {
+	final TILE_WIDTH:Int = 16;
+	final TILE_HEIGHT:Int = 16;
+
 	var settingsButton:FlxButton;
 	var settingsOpen:Bool = false;
 	var settingsSub:SettingsSubState;
@@ -19,8 +22,8 @@ class PlayState extends FlxState
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
 		add(settingsButton);
 		terrain = new FlxTilemap();
-		terrain.loadMapFrom2DArray(generateTerrainChunk(10, 10, 1, 1),
-		"assets/images/tilesets/testtileset.png", 16, 16,
+		terrain.loadMapFrom2DArray(generateTerrainChunk(Std.int(FlxG.height / TILE_HEIGHT), Std.int(FlxG.width / TILE_WIDTH), 1, 1),
+		"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
 		FlxTilemapAutoTiling.OFF);
 		add(terrain);
 		terrain.screenCenter();
@@ -47,7 +50,7 @@ class PlayState extends FlxState
 
 	function generateTerrainTile(x:Int, y:Int):Int{
 		//Magical generation function that returns which tile is located at x, y
-		return Math.floor(Math.random() * 51);
+		return Math.floor(Std.random(51));
 	}
 
 	function settingsButtonClicked():Void{
