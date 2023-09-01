@@ -22,9 +22,11 @@ class PlayState extends FlxState
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
 		add(settingsButton);
 		terrain = new FlxTilemap();
-		terrain.loadMapFrom2DArray(generateTerrainChunk(Std.int(FlxG.height / TILE_HEIGHT), Std.int(FlxG.width / TILE_WIDTH), 1, 1),
-		"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
-		FlxTilemapAutoTiling.OFF);
+		terrain.loadMapFrom2DArray(generateTerrainChunk(
+			Std.int(FlxG.height / TILE_HEIGHT),
+			Std.int(FlxG.width / TILE_WIDTH), 1, 1),
+			"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
+			FlxTilemapAutoTiling.OFF);
 		add(terrain);
 		terrain.screenCenter();
 		super.create();
