@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.tile.FlxBaseTilemap;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
+import hxnoise.Perlin;
 
 class PlayState extends FlxState
 {
@@ -15,6 +16,8 @@ class PlayState extends FlxState
 	var settingsOpen:Bool = false;
 	var settingsSub:SettingsSubState;
 
+	private var perlin:Perlin;
+
 	var terrain:FlxTilemap;
 
 	var coreunit:CoreUnit;
@@ -23,6 +26,8 @@ class PlayState extends FlxState
 	{
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
 		
+		perlin = new Perlin();
+
 		terrain = new FlxTilemap();
 		terrain.loadMapFrom2DArray(generateTerrainChunk(
 			Std.int(FlxG.height / TILE_HEIGHT),
@@ -60,7 +65,17 @@ class PlayState extends FlxState
 
 	function generateTerrainTile(x:Int, y:Int):Int{
 		//Magical generation function that returns which tile is located at x, y
-		return Math.floor(Std.random(51));
+		var t:Float = perlin.OctavePerlin(x / 4, y / 4, 0.1, 5, 0.5, 0.25);
+		trace(t);
+		if(t < 0.2){
+			return 0; //3
+		} else if (t < 0.4){
+			return 1; //8
+		} else if (t < 0.7){
+			return 1; //0
+		} else {
+			return 0; //1
+		}
 	}
 
 	function settingsButtonClicked():Void{
