@@ -33,7 +33,7 @@ class PlayState extends FlxState
 			Std.int(FlxG.height / TILE_HEIGHT),
 			Std.int(FlxG.width / TILE_WIDTH), 1, 1),
 			"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
-			FlxTilemapAutoTiling.OFF);
+			FlxTilemapAutoTiling.OFF, 0);
 		
 		coreunit = new CoreUnit(250, 250);
 		
@@ -65,16 +65,16 @@ class PlayState extends FlxState
 
 	function generateTerrainTile(x:Int, y:Int):Int{
 		//Magical generation function that returns which tile is located at x, y
-		var t:Float = perlin.OctavePerlin(x / 4, y / 4, 0.1, 5, 0.5, 0.25);
+		var t:Float = perlin.OctavePerlin(x / 8, y / 8, 0.1, 8, 0.25, 0.5);
 		trace(t);
-		if(t < 0.2){
-			return 0; //3
-		} else if (t < 0.4){
-			return 1; //8
-		} else if (t < 0.7){
+		if(t < 0.4){
+			return 3; //3
+		} else if (t < 0.5){
+			return 8; //8
+		} else if (t < 0.6){
 			return 1; //0
 		} else {
-			return 0; //1
+			return 2; //1
 		}
 	}
 
