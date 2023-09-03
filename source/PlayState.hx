@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxCamera.FlxCameraFollowStyle;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxBaseTilemap;
@@ -26,21 +27,23 @@ class PlayState extends FlxState
 	{
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
 		
+		coreunit = new CoreUnit(250, 250);
+
 		perlin = new Perlin();
 
 		terrain = new FlxTilemap();
 		terrain.loadMapFrom2DArray(generateTerrainChunk(
-			Std.int(FlxG.height / TILE_HEIGHT),
-			Std.int(FlxG.width / TILE_WIDTH), 1, 1),
+			100,
+			100, 1, 1),
 			"assets/images/tilesets/testtileset.png", TILE_WIDTH, TILE_HEIGHT,
 			FlxTilemapAutoTiling.OFF, 0);
-		
-		coreunit = new CoreUnit(250, 250);
-		
+
 		add(terrain);
 		add(coreunit);
 		add(settingsButton);
 		terrain.screenCenter();
+
+		FlxG.camera.follow(coreunit, FlxCameraFollowStyle.LOCKON);
 
 		super.create();
 	}
@@ -68,13 +71,13 @@ class PlayState extends FlxState
 		var t:Float = perlin.OctavePerlin(x / 8, y / 8, 0.1, 8, 0.25, 0.5);
 		trace(t);
 		if(t < 0.4){
-			return 3; //3
-		} else if (t < 0.5){
-			return 8; //8
-		} else if (t < 0.6){
-			return 1; //0
+			return 3; //3, water
+		} else if (t < 0.45){
+			return 8; //8, sand
+		} else if (t < 0.55){
+			return 33; //0, grass, tilemap error (?)
 		} else {
-			return 2; //1
+			return 1; //1, stone
 		}
 	}
 
