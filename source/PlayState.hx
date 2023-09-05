@@ -8,24 +8,30 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import hxnoise.Perlin;
 
-class PlayState extends FlxState
-{
+class PlayState extends FlxState {
+	//Tiling Variables
 	final TILE_WIDTH:Int = 16;
 	final TILE_HEIGHT:Int = 16;
-
-	var settingsButton:FlxButton;
-	var settingsOpen:Bool = false;
-	var settingsSub:SettingsSubState;
 
 	private var perlin:Perlin;
 
 	var terrain:FlxTilemap;
 
+	//Substates
+	var settingsButton:FlxButton;
+	var settingsOpen:Bool = false;
+	var settingsSub:SettingsSubState;
+
+	var techButton:FlxButton;
+	var techSub:TechSubState;
+
+	//Sprites
 	var coreunit:CoreUnit;
 
 	override public function create()
 	{
 		settingsButton = new FlxButton(0, 0, "Settings", settingsButtonClicked);
+		techButton = new FlxButton(0, 200, "Tech Tree", techButtonClicked);
 		
 		coreunit = new CoreUnit(250, 250);
 
@@ -41,6 +47,7 @@ class PlayState extends FlxState
 		add(terrain);
 		add(coreunit);
 		add(settingsButton);
+		add(techButton);
 		terrain.screenCenter();
 
 		FlxG.camera.follow(coreunit, FlxCameraFollowStyle.LOCKON);
@@ -89,5 +96,10 @@ class PlayState extends FlxState
 			openSubState(settingsSub);
 		}
 		settingsOpen = !settingsOpen;
+	}
+
+	function techButtonClicked():Void{
+		techSub = new TechSubState();
+		openSubState(techSub);
 	}
 }
